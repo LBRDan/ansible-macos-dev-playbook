@@ -1,0 +1,47 @@
+
+mas_installed_app_ids:
+  - 497799835 # Xcode
+  - 1176895641 # Spark
+  - 1102004240 # iHosts
+  # Personal
+  - 937984704 # Amphetamine
+
+homebrew_installed_packages:
+  - node
+  - nvm
+  - doctl
+  - bat
+  - jq
+  - ncdu
+  - neovim
+  - stow
+  - act
+  - terraform
+
+
+
+homebrew_cask_apps:
+  - google-chrome
+  - visual-studio-code
+  - iterm2
+  - gitkraken
+  - raycast
+  - proxyman
+  - charles
+  - keka
+  - tunnelblick
+  - zoom
+  - slack
+  - postman
+  - altair-graphql-client
+  - cyberduck
+  - parallels
+  - docker
+  - appcleaner
+  - monitorcontrol
+
+dockitems_remove:
+  - TV
+  - Podcasts
+  - 'App Store'
+

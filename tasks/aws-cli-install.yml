@@ -1,0 +1,20 @@
+---
+# Inspired by https://github.com/xchangebit/ansible-aws-cli
+
+- name: Download the awscli bundle.
+  get_url: url=https://awscli.amazonaws.com/AWSCLIV2.pkg dest=/tmp/AWSCLIV2.pkg
+  register: aws_cli_download_bundle
+
+- name: (SUDO) Run installer AWSCLIV2
+  ansible.builtin.command: installer -pkg /tmp/AWSCLIV2.pkg -target /
+  become: true
+
+- name: Configure AWS.
+  shell: aws configure set {{ item.key }} {{ item.value }} --profile {{ aws_profile }}
+  no_log: True
+  with_dict:
+    aws_access_key_id: "{{ aws_access_key }}"
+    aws_secret_access_key: "{{ aws_secret_key }}"
+    region: "{{ aws_region }}"
+    format: "{{ aws_format }}"
+  changed_when: false

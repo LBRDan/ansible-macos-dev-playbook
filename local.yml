@@ -1,0 +1,40 @@
+---
+#
+# All local tasks
+#
+
+- name: Install Every useful tool
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  vars_files:
+    - vars/config.yml
+    - vars/secret.vars.yml
+  pre_tasks:
+    - name: Install Amphetamine Enhancer
+      include_tasks: ./tasks/dmg-install.yml
+      vars:
+        - appName: "Amphetamine Enhancer"
+        - dmgURL: https://github.com/x74353/Amphetamine-Enhancer/raw/master/Releases/Current/Amphetamine%20Enhancer.dmg
+
+    - name: Tap a Homebrew repository, state present
+      community.general.homebrew_tap:
+        name: homebrew/cask-fonts
+  tasks:
+    - include_role:
+        name: geerlingguy.mac.mas
+      when: mas_email is defined
+    - name: Download and Install AWS CLI
+      include_tasks: 
+        file: ./tasks/aws-cli-install.yml
+        apply:
+          tags:
+            - aws
+      tags:
+        - aws
+      
+   # Clone dotfiles repo, stow ...
+  roles:
+    - elliotweiser.osx-command-line-tools
+    - geerlingguy.mac.homebrew
+    - geerlingguy.mac.dock
